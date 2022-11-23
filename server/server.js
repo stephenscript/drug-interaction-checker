@@ -6,18 +6,16 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static(path.resolve(__dirname, '../client')));
 
+// api call
+app.use('/api', apiRouter);
 app.use('/', 
 (req, res) => {
   res.sendFile(path.resolve(__dirname, '../index.html'))//__dirname, 'index.html'));
 });
-
-app.use('/api', apiRouter);
-
+// error handling
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
-
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
