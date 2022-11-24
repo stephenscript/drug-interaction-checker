@@ -8,44 +8,20 @@ const fetch = require('node-fetch');
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {
       data: null
     };
   }
 
-
   componentDidMount() {
-    // fetch('/api', {
-    //   headers :  {
-    //     drug1: 'ibuprofen',
-    //     drug2: 'losartan'
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log(data)
-    //     this.setState({severity: data[0], message:data[1]});
-    //   })
-  }
-
-  handleClick(row, square) {
-
-    this.setState({
-      rows,
-      turn,
-      winner,
-    });
   }
 
   render() {
     const { severity, message } = this.state;
-    console.log(message)
     return (
       <div>
         <SelectDrugs />
-        <div>{severity}</div>
-        <div>{message}</div>
+        <div className="message">{message}</div>
       </div>
     );
   }

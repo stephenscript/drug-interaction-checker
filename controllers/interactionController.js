@@ -20,33 +20,27 @@ interactionController.getDrugIdFromName = async (req, res, next) => {
   await fetch(`https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${drug1}&search=1`)
     .then(res => res.json())
     .then(data => {
-      if (!Object.hasOwn(data.idGroup, 'rxnormId')) return next('Invalid Drug');
+      if (!Object.hasOwn(data.idGroup, 'rxnormId')) return next({ message: 'First drug name invalid!' });
       res.locals.id1 = data.idGroup.rxnormId[0];
       console.log('id1:', res.locals.id1)
-      //if (!res.locals.id2) return;
       return;
     }) 
-    .catch((err) => {
-      console.log(err)
-    })
 
   await fetch(`https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${drug2}&search=1`)
     .then(res => res.json())
     .then(data => {
-      if (!Object.hasOwn(data.idGroup, 'rxnormId')) return next('Invalid Drug');
+      if (!Object.hasOwn(data.idGroup, 'rxnormId')) return next({ message: 'Second drug name invalid!' });
       res.locals.id2 = data.idGroup.rxnormId[0];
       console.log('id1:', res.locals.id2);
       return next();
     })
-    .catch((err) => {
-      console.log(err)
-    })
     
 };
 
-interactionController.getDrugInteractionData = (req, res, next) => {
+interactionController.getDrugInteractionData = async (req, res, next) => {
+  console.log('getDrugInteraction');
   const apiRequest = `https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${res.locals.id1}&sources=DrugBank`;
-  fetch(apiRequest)
+  await fetch(apiRequest)
     .then(res => res.json())
     .then(response => {
       console.log('interactionController', response)
@@ -57,13 +51,12 @@ interactionController.getDrugInteractionData = (req, res, next) => {
 };
 
 interactionController.findDrugInteractions = (req, res, next) => {
+  console.log('findDrugInteraction');
   // iterate over interactions to find second drug in interaction pairs
-  //res.locals.interactionMessage = `No interactions found between ${res.locals.drug1} and ${res.locals.drug2}.`;
   for (const interaction of res.locals.interactions) {
     const otherDrugId = interaction.interactionConcept[1].minConceptItem.rxcui;
     console.log(otherDrugId)
     if (otherDrugId === res.locals.id2) {
-      console.log('id2', res.locals.id2)
       res.locals.interactionMessage = [interaction.severity, interaction.description];
       return next();
     }

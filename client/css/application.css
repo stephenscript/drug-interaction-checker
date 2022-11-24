@@ -1,3 +1,61 @@
 body {
-  background-color: rgb(221, 255, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-image: url('https://wallpaperaccess.com/full/1464968.jpg');
+  background-repeat: no-repeat;
+  
+}
+
+.title {
+  text-align: center;
+  font-size: 40px;
+  width: 450px;
+  height: 100px;
+  margin-left: -25px;
+  margin-top: 100px;
+  background: rgb(230,230,230);
+  background: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(255,255,255,1) 49%, rgba(230,230,230,1) 100%);
+  border: 1px solid black;
+}
+
+.title .div {
+  justify-content: center;
+}
+
+.Input {
+  font-size: 20px;
+  width: 400px;
+  height: 500px;
+  background: rgb(194,118,1);
+  background: linear-gradient(90deg, rgba(194,118,1,1) 0%, rgba(225,136,0,1) 9%, rgba(255,154,0,1) 47%, rgba(236,143,0,1) 84%, rgba(194,118,1,1) 93%);
+  box-shadow: 30px 20px 30px rgb(60, 60, 60);
+}
+
+input {
+  text-align: center;
+  font-size: 20px;
+}
+
+.inputFields {
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  margin-top: 125px;
+  margin-left: 25px;
+  flex-direction: column;
+  justify-content: center;
+  width: 350px;
+  background-color: white;
+}
+
+.message {
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 300px;
+  font-size: 20px ;
+  background-color: white;
+  box-shadow: 5px 10px 10px rgb(195, 87, 28);
 }
